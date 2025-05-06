@@ -2,5 +2,5 @@
 
 This case when docker was setting with different port to connect linux on windows, and docker can shared information outoff linux to windows was needed to change port, for that it need to create a export env var to use per minikube to know how connect with docker
 
-> $ export DOCKER_HOST=tcp://0.0.0.0:2375
+> $ export DOCKER_HOST=tcp://0.0.0.0:2375 \
 > $ minikube start --driver=docker
