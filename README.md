@@ -12,11 +12,17 @@ Install minikube
 
 Start
 
-> $ minikube start
+> $ minikube start --driver=docker
+>> Over docker drive \
+> $ minikube start --drive=docker --nodes=2 --cpus=2 --memory=8g
 
 Stop
 
 > $ minikube stop
+
+Delete
+
+> $ minikube delete
 
 Status
 
@@ -27,3 +33,8 @@ Status
 > kubelet: Running \
 > apiserver: Running \
 > kubeconfig: Configured
+
+Profile list
+
+> $ minikube profile list
+>> $ minikube profile [list, minikube, minibox, default]
