@@ -44,6 +44,10 @@
 >> kube-public       Active   15h \
 >> kube-system       Active   15h \
 
+> $ kubectl create namespaces <<new-name-space>>
+>> namespace/test-namespace created
+>> create a new name space, you get find it with *get* command
+
 ## Poxy
 
 > $ kubectl proxy & \
