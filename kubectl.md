@@ -90,4 +90,4 @@ With this commands kubect allow us to request to ip and port
 ## rollout
 
 > $ kubectl rollout [history, undo] [deploy, deployment] [name] [--revision={#}, --to-revision={#}]
->> back status to revision set
+>> see status to revision set with history and undo is to back to that state
