@@ -78,3 +78,11 @@ With this commands kubect allow us to request to ip and port
 
 > $ curl ${URL}/healthz --header "Authorization: Bearer $TOKEN" --insecure
 >> this command show us OK , it same way that use proxy <- proxy export internat port to external port, with token we can use direct port with this commands
+
+## ReplicaSets
+
+> $ kubectl get replicasets or $ kubecto get rs
+>> NAME       DESIRED   CURRENT   READY   AGE
+>> frontend   3         3         0       25s
+
+> $ kubectl scale rs frontend --replicas={count-desired}
