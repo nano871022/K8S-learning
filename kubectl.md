@@ -86,3 +86,8 @@ With this commands kubect allow us to request to ip and port
 >> frontend   3         3         0       25s
 
 > $ kubectl scale rs frontend --replicas={count-desired}
+
+## rollout
+
+> $ kubectl rollout [history, undo] [deploy, deployment] [name] [--revision={#}, --to-revision={#}]
+>> back status to revision set
