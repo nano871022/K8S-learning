@@ -14,6 +14,9 @@ when you need to create a pod handly
 > $ kubectl apply -f {file-yaml}
 >> this command run setting in file-yaml
 
+> $ kubectl replace --force -f {file-yaml}
+>> this command replace previous pod with same name with new setting yaml, when you change anything into yaml and pod its running you can use this to stop, delete and replace that pod with new settings.
+
 > $ kubectl get pods
 >> this command show pods created
 
