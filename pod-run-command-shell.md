@@ -17,6 +17,9 @@ when you need to create a pod handly
 > $ kubectl get pods
 >> this command show pods created
 
+> $ kubectl get pods -o wide
+>> show information pods with most detail 
+
 > $ kubectl get pod {name-pod} -o yaml
 >> this command show full complete description setting of execution pod in yaml format
 
