@@ -43,3 +43,13 @@
 >> kube-node-lease   Active   15h  \
 >> kube-public       Active   15h \
 >> kube-system       Active   15h \
+
+## Poxy
+
+> $ kubectl proxy & \
+>> it create endpoint http://localhost:8001/... \
+>>> /healthz \
+>>> /metrics \
+>>> /api/ \
+>>> /api/v1 \
+>>> /apis/ \
