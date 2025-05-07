@@ -1,6 +1,0 @@
-# Addons
-
-## List addons
-
-> $ minikube addons list \
->> it show a table with all addons enable or disble you have setting on it
