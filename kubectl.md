@@ -56,11 +56,21 @@
 
 ## Create 
 
-> $ kubectl create token default \
+> $ kubectl create token default 
 >> it create token to use auth against server, and it is format jwt \
 
-> $ kubectl create clusterrole api-access-root --verb=get --non-resource-url=/* \
+> $ kubectl create clusterrole api-access-root --verb=get --non-resource-url=/* 
 >> it create a cluseter role to acces api-access-root  \
+>> clusterrole.rbac.authorization.k8s.io/api-access-root created
 
-> $ kubectl create clusterrolebinding api-access-root --clusterrole api-access-root --serviceaccount=default:default \
->> it create cluser role binding acces api-access-root
+> $ kubectl create clusterrolebinding api-access-root --clusterrole api-access-root --serviceaccount=default:default 
+>> it create cluser role binding acces api-access-root \
+>> clusterrolebinding.rbac.authorization.k8s.io/api-access-root created
+
+With this commands kubect allow us to request to ip and port 
+
+> $ kubectl config view -o jsonpath='{.clusters[?(@.name == "minikube")].cluster.server}'
+>> this command get url of server on cluster to make request
+
+> $ curl ${URL}/healthz --header "Authorization: Bearer $TOKEN" --insecure
+>> this command show us OK , it same way that use proxy <- proxy export internat port to external port, with token we can use direct port with this commands
