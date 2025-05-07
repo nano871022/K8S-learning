@@ -18,7 +18,9 @@
 ### Check configuration 
 
 > $ kubectl config view \
->> it show seting of context, cluster and user, depend all profile created on it.
+>> it show setting of context, cluster and user, depend all profile created on it.   \
+> $ cat ~/.kube/config \
+>> it show same information of previous command
 
 ### Ckeck cluster info
 
@@ -26,3 +28,18 @@
 > Kubernetes control plane is running at https://0.0.0.0:32771
 > CoreDNS is running at https://0.0.0.0:32771/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 > To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+
+### Check nodes
+
+> $ kubectl get nodes \
+>> NAME       STATUS   ROLES           AGE   VERSION \
+>> minikube   Ready    control-plane   15h   v1.30.0
+
+### Check namespaces
+
+> $ kubectl get namespaces \
+>> NAME              STATUS   AGE
+>> default           Active   15h
+>> kube-node-lease   Active   15h
+>> kube-public       Active   15h
+>> kube-system       Active   15h
