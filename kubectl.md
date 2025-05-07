@@ -38,8 +38,8 @@
 ### Check namespaces
 
 > $ kubectl get namespaces \
->> NAME              STATUS   AGE
->> default           Active   15h
->> kube-node-lease   Active   15h
->> kube-public       Active   15h
->> kube-system       Active   15h
+>> NAME              STATUS   AGE \
+>> default           Active   15h  \
+>> kube-node-lease   Active   15h  \
+>> kube-public       Active   15h \
+>> kube-system       Active   15h \
