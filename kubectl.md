@@ -53,3 +53,12 @@
 >>> /api/ \
 >>> /api/v1 \
 >>> /apis/ \
+
+## Create 
+
+> $ kubectl create token default \
+>> it create token to use auth against server, and it is format jwt \
+> $ kubectl create clusterrole api-access-root --verb=get --non-resource-url=/*
+>> it create a cluseter role to acces api-access-root
+> $ kubectl create clusterrolebinding api-access-root --clusterrole api-access-root --serviceaccount=default:default
+>> it create cluser role binding acces api-access-root
