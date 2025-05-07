@@ -32,3 +32,7 @@ when you need to create a pod handly
 > $ kubectl delete pod {name-pod}
 >> this command show delete pod named
 
+> $ kube delete {file-yaml}
+>> this command delete pod too
+
+
