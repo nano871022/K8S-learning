@@ -14,3 +14,15 @@
 > Client Version: v1.30.2 \
 > Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3 \
 > Server Version: v1.30.0
+
+### Check configuration 
+
+> $ kubectl config view \
+>> it show seting of context, cluster and user, depend all profile created on it.
+
+### Ckeck cluster info
+
+> $ kubectl cluster-info \
+> Kubernetes control plane is running at https://0.0.0.0:32771
+> CoreDNS is running at https://0.0.0.0:32771/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+> To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
