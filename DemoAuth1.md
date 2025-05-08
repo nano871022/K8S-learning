@@ -119,4 +119,37 @@ View all configuration
 
 Create a Deployment over namespace test-namespace
 
-> $ 
+> $ kubectl -n test-namespace create deployment nginx-demo1 --image=nginx:alpine
+>> deployment.apps/nginx-demo1 created
+
+Check Pod on Namespace
+
+>  $ kubectl get pods -n test-namespace
+>> NAME                           READY   STATUS    RESTARTS   AGE
+>> nginx-demo1-85d5d9fc76-8p55t   1/1     Running   0          31s
+
+Check Pod in context
+
+> $ kubectl get pods --context=demos-user1-context
+>> Error from server (Forbidden): pods is forbidden: User "user1" cannot list resource "pods" in API group "" in the namespace "test-namespace"
+
+Create Role for namespace
+
+># create role.yaml \
+>apiVersion: rbac.authorization.k8s.io/v1 \
+>kind: Role \
+>metadata: \
+>  name: pod-reader \
+>  namespace: test-namespace \
+>rules: \
+>- apiGroups: [""] \
+>  resources: ["pods"] \
+>  verbs: ["get", "watch", "list"] \
+>> $ kubectl create -f role.yaml
+>>> role.rbac.authorization.k8s.io/pod-reader created
+
+Check roles on namespaces
+
+> $ kubectl get roles -n test-namespace
+>> NAME         CREATED AT
+>> pod-reader   2025-05-08T21:38:52Z
