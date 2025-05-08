@@ -1,25 +1,25 @@
 # Demo Authentication 1
 
-Create a namespace
+## Create a namespace
 
 > $ kubectl create namespace demo-auth1
 >> namespace/demo-auth1 created
 
-Create folder to Role-Base Access Control
+## Create folder to Role-Base Access Control
 
 > $ mkdir rbac | cd rbac
 
-Create a new user demo-user1
+## Create a new user demo-user1
 
 > $ sudo useradd -s /bin/bash demo-user1
 > $ sudo passwd demos-user1 # same name to passwd
 
-Create private key
+## Create private key
 
 > $ openssl genrsa -out demos-user1.key 2048 \
 > $ openssl req -new -key demos-user1.key -out demos-user1.csr -subj "/CN=user1/O=demos"
 
-Create Signing Request yaml
+## Create Signing Request yaml
 
 > $ vim signingrequest.yaml
 >> apiVersion: certificates.k8s.io/v1 \
@@ -36,18 +36,18 @@ Create Signing Request yaml
 >>   - key encipherment \
 >>   - client auth
 
-Create on k8s
+## Create on k8s
 
 > $ kubectl create -f signing-request.yaml
 >> certificatesigningrequest.certificates.k8s.io/demos-user1-csr created
 
-Check csr in K8s
+## Check csr in K8s
 
 > $ kubectl get csr
 >> NAME              AGE   SIGNERNAME                            REQUESTOR       REQUESTEDDURATION   CONDITION
 >> demos-user1.csr   24s   kubernetes.io/kube-apiserver-client   minikube-user   <none>              Pending
 
-Aprove certificated
+## Approve certificated
 
 > $ kubectl certificate approve demos-user1.csr
 >> certificatesigningrequest.certificates.k8s.io/demos-user1.csr approved
@@ -59,20 +59,20 @@ Aprove certificated
 >> NAME              AGE   SIGNERNAME                            REQUESTOR       REQUESTEDDURATION   CONDITION
 >> demos-user1.csr   24s   kubernetes.io/kube-apiserver-client   minikube-user   <none>              Approved,Issued
 
-Get certificate from K8s
+## Get certificate from K8s
 
 > $ kubectl get csr demos-user1.csr -o jsonpath='{.status.certificate}' | base64 -d > certificate-demos-user1.crt
 
-Assign Certificate to *user1* credentials
+## Assign Certificate to *user1* credentials
 
 > $ kubectl config set-credentials user1 --client-certificate=demos-user1.crt --client-key=demos-user.key
 
-Assign user to context (cluster, namespace, user)
+## Assign user to context (cluster, namespace, user)
 
 > $ kubectl config set-context demos-user1-context --cluster=minikube --namespace=test-namespace --user=user1
 >> Context "demos-user1-context" created.
 
-View all configuration
+## View all configuration
 
 > $ kubectl config view
 >>apiVersion: v1
@@ -117,23 +117,23 @@ View all configuration
 >>    client-certificate: /mnt/c/Users/jose.parra.PERFICIENT/workspace-k8s/learning-cnfc/rbac/demos-user1-copy.crt
 >>    client-key: /mnt/c/Users/jose.parra.PERFICIENT/workspace-k8s/learning-cnfc/rbac/demos-user1.key
 
-Create a Deployment over namespace test-namespace
+## Create a Deployment over namespace test-namespace
 
 > $ kubectl -n test-namespace create deployment nginx-demo1 --image=nginx:alpine
 >> deployment.apps/nginx-demo1 created
 
-Check Pod on Namespace
+## Check Pod on Namespace
 
 >  $ kubectl get pods -n test-namespace
 >> NAME                           READY   STATUS    RESTARTS   AGE
 >> nginx-demo1-85d5d9fc76-8p55t   1/1     Running   0          31s
 
-Check Pod in context
+## Check Pod in context
 
 > $ kubectl get pods --context=demos-user1-context
 >> Error from server (Forbidden): pods is forbidden: User "user1" cannot list resource "pods" in API group "" in the namespace "test-namespace"
 
-Create Role for namespace
+## Create Role for namespace
 
 >### create role.yaml 
 >apiVersion: rbac.authorization.k8s.io/v1 \
@@ -148,13 +148,13 @@ Create Role for namespace
 >> $ kubectl create -f role.yaml
 >>> role.rbac.authorization.k8s.io/pod-reader created
 
-Check roles on namespaces
+## Check roles on namespaces
 
 > $ kubectl get roles -n test-namespace
 >> NAME         CREATED AT
 >> pod-reader   2025-05-08T21:38:52Z
 
-Create Role Binding
+## Create Role Binding
 
 > ### Create file rolebinding.yaml
 > apiVersion: rbac.authorization.k8s.io/v1
@@ -173,7 +173,7 @@ Create Role Binding
 >> $ kubectl create -f rolebinding.yaml
 >>> rolebinding.rbac.authorization.k8s.io/pod-read-access created
 
-Check Role Bindings
+## Check Role Bindings
 
 > $ kubectl get rolebindings --namespace test-namespace
 >> NAME              ROLE              AGE
