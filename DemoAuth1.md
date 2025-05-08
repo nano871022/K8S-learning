@@ -135,7 +135,7 @@ Check Pod in context
 
 Create Role for namespace
 
-># create role.yaml \
+>### create role.yaml 
 >apiVersion: rbac.authorization.k8s.io/v1 \
 >kind: Role \
 >metadata: \
@@ -144,7 +144,7 @@ Create Role for namespace
 >rules: \
 >- apiGroups: [""] \
 >  resources: ["pods"] \
->  verbs: ["get", "watch", "list"] \
+>  verbs: ["get", "watch", "list"] 
 >> $ kubectl create -f role.yaml
 >>> role.rbac.authorization.k8s.io/pod-reader created
 
@@ -153,3 +153,33 @@ Check roles on namespaces
 > $ kubectl get roles -n test-namespace
 >> NAME         CREATED AT
 >> pod-reader   2025-05-08T21:38:52Z
+
+Create Role Binding
+
+> ### Create file rolebinding.yaml
+> apiVersion: rbac.authorization.k8s.io/v1
+> kind: RoleBinding
+> metadata:
+>   name: pod-read-access
+>   namespace: test-namespace
+> subjects:
+> - kind: User
+>   name: bob
+>   apiGroup: rbac.authorization.k8s.io
+> roleRef:
+>   kind: Role
+>   name: pod-reader
+>   apiGroup: rbac.authorization.k8s.io
+>> $ kubectl create -f rolebinding.yaml
+>>> rolebinding.rbac.authorization.k8s.io/pod-read-access created
+
+Check Role Bindings
+
+> $ kubectl get rolebindings --namespace test-namespace
+>> NAME              ROLE              AGE
+>> pod-read-access   Role/pod-reader   2m51s
+
+Check again Context for namespace
+> $ kubectl get pods --context=demos-user1-context
+>> NAME                           READY   STATUS    RESTARTS   AGE
+>> nginx-demo1-85d5d9fc76-8p55t   1/1     Running   0          17m
