@@ -40,3 +40,21 @@ Create on k8s
 
 > $ kubectl create -f signing-request.yaml
 >> certificatesigningrequest.certificates.k8s.io/demos-user1-csr created
+
+Check csr in K8s
+
+> $ kubectl get csr
+>> NAME              AGE   SIGNERNAME                            REQUESTOR       REQUESTEDDURATION   CONDITION
+>> demos-user1.csr   24s   kubernetes.io/kube-apiserver-client   minikube-user   <none>              Pending
+
+Aprove certificated
+
+> $ kubectl certificate approve demos-user1.csr
+>> certificatesigningrequest.certificates.k8s.io/demos-user1.csr approved
+
+
+> Check csr Approved in K8s 
+
+> $ kubectl get csr
+>> NAME              AGE   SIGNERNAME                            REQUESTOR       REQUESTEDDURATION   CONDITION
+>> demos-user1.csr   24s   kubernetes.io/kube-apiserver-client   minikube-user   <none>              Approved,Issued
