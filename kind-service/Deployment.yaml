@@ -4,18 +4,19 @@ metadata:
   labels:
     app: frontend
   name: frontend
+  namespace: test-namespace
 spec:
   replicas: 3
   selector:
     matchLabels:
       app: frontend
-    template:
+  template:
       metadata:
         labels:
           app: frontend
       spec:
         containers:
-        - image: frontend-application
-        name: frontend-application
-        ports:
-        - containerPort: 5000
+         - image: nginx:alpine
+           name: frontend-application
+           ports:
+            - containerPort: 5000
