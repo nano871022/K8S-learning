@@ -14,23 +14,23 @@ it does not define any endpoints, it return a CNAME record of an externally conf
 
 it is helpfully when the POD has multiple port listening of a POD with multipler container user port each one of them
 
-> apiVersion: v1
-> kind: Service
-> metadata:
->  name: my-service
-> spec:
->  selector:
->   app: my-app
->  type: NodePort
->  ports:
->  - name: http
->    protocol: TCP
->    port: 8080
->    targetPort: 80
->    nodePort: 31080
+> apiVersion: v1 \
+> kind: Service \
+> metadata: \
+>  name: my-service \
+> spec: \
+>  selector: \
+>   app: my-app \
+>  type: NodePort \
+>  ports: 
+>  - name: http \
+>    protocol: TCP \
+>    port: 8080 \
+>    targetPort: 80 \
+>    nodePort: 31080 \
 >  - name: https:
->    protocol: TCP
->    port: 8443
->    targetPort: 443
+>    protocol: TCP \
+>    port: 8443 \
+>    targetPort: 443 \
 >    nodePort: 31443
 
