@@ -91,3 +91,11 @@ With this commands kubect allow us to request to ip and port
 
 > $ kubectl rollout [history, undo] [deploy, deployment] [name] [--revision={#}, --to-revision={#}]
 >> see status to revision set with history and undo is to back to that state
+
+## Edit 
+
+when we want to edit configuration of any project in hot
+
+> kubectl edit {kind[service,deployment,pod]} {nameservice}
+>> {kind[service,deployment,pod]}/{name} edited \
+>> open a vim console to edit the settings , when you finish it is saved and apply that new setting
