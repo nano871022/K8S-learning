@@ -27,7 +27,7 @@ it is helpfully when the POD has multiple port listening of a POD with multipler
 >    protocol: TCP \
 >    port: 8080 \
 >    targetPort: 80 \
->    nodePort: 31080 \
+>    nodePort: 31080 
 >  - name: https:
 >    protocol: TCP \
 >    port: 8443 \
