@@ -114,3 +114,23 @@ Both the Cluster and Local options are available for requests generated internal
 >       targetPort: 5000 \
 >   internalTrafficPolicy: Local \
 >   externalTrafficPolicy: Local
+
+# Service Discovery
+
+Service is first level comunication with K8S, ant it has 2 methods for discovery
+
+## Environment Variables
+
+When POD start on any worker, the KUBELET running over that node to add set of enviroment variables.
+
+## DNS
+
+K8S has Addons for DNS, which create  a DNS records for each service, name of host is union of name of \
+*{container/pod}.{namespace}.{kind[svc]}.cluster.local*
+
+## Run command on Container
+
+if we need to connect to a container, we can exec next command.
+
+> $ kubectl exec  {client-app-pod-name} -c {client-container-name} --/bin/sh -c curl -s frontend-svc:80
+>> idea this comman is run a CURL command over client-container-name locate in client-app-pod-name, it get data from host *frontend-svc* in port *80* request.
