@@ -186,3 +186,10 @@ A service use a port between 30.000 and 32.767, when it have the port, it assing
 
 > $ kubectl create service nodeport frontend-svc --tcp=80:5000 --node-port=32233
 >> create deployment-service type nodeport called frontend-svc exposing port 80 across 5000 port
+
+#### Create an exposer service at same time
+
+> $ kubectl run {name} --image={imamge:version} --port={port} --expose=true
+>> service/{name} created \
+>> pod/{name} created
+
