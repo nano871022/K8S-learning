@@ -34,3 +34,15 @@ it is helpfully when the POD has multiple port listening of a POD with multipler
 >    targetPort: 443 \
 >    nodePort: 31443
 
+# Port Forwarding
+
+easily forward from local port to application port.
+
+> $ kubectl port-forward deploy/fontend 8080:5000
+>> cominicate to especific pod
+
+> $ kubectl port-forward frontendt-77asd787-asdasd 8080:5000
+>> communicate a especifi container into pod
+
+> $ kubectl port-forward service/frontend-svc 8080:80
+>> communicate to loadbalancer per default manage that service
