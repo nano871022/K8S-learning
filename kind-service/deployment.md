@@ -134,3 +134,4 @@ if we need to connect to a container, we can exec next command.
 
 > $ kubectl exec  {client-app-pod-name} -c {client-container-name} --/bin/sh -c curl -s frontend-svc:80
 >> idea this comman is run a CURL command over client-container-name locate in client-app-pod-name, it get data from host *frontend-svc* in port *80* request.
+
