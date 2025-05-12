@@ -119,11 +119,11 @@ Both the Cluster and Local options are available for requests generated internal
 
 Service is first level comunication with K8S, ant it has 2 methods for discovery
 
-## Environment Variables
+### Environment Variables
 
 When POD start on any worker, the KUBELET running over that node to add set of enviroment variables.
 
-## DNS
+### DNS
 
 K8S has Addons for DNS, which create  a DNS records for each service, name of host is union of name of \
 *{container/pod}.{namespace}.{kind[svc]}.cluster.local*
@@ -135,3 +135,54 @@ if we need to connect to a container, we can exec next command.
 > $ kubectl exec  {client-app-pod-name} -c {client-container-name} --/bin/sh -c curl -s frontend-svc:80
 >> idea this comman is run a CURL command over client-container-name locate in client-app-pod-name, it get data from host *frontend-svc* in port *80* request.
 
+## Service Type: Property
+
+We can descide how connect to that service:
+* Accessing within Cluster
+* Accessing within Cluster and External world
+* Maps to an entity which enable inside or outside the cluster connection
+
+### Option: ClusterIP (default)
+
+A service use a Cluster IP Address to communicate with service and it just accesible since cluster.
+
+> apiVersion: v1 \
+> kind: Service \
+> metadata: \
+>  name: frontend-svc \
+> spec: \
+>  selector: \
+>   app: frontend \
+>  ports: 
+>  - protocol: TCP \
+>    port: 80 \
+>    targetPort: 5000 \
+>  *type: ClusterIP*
+
+### Option: NodePort
+
+A service use a port between 30.000 and 32.767, when it have the port, it assing to all worker node that port to redirect it port to ClusterIp has the service setting.
+
+> apiVersion: v1 \
+> kind: Service \
+> metadata: \
+>  name: frontend-svc \
+> spec: \
+>  selector: \
+>    app: frontend \
+>  ports:
+>  - protocol: TCP \
+>    port: 80 \
+>    targetPort: 5000 \
+>    nodePort: 32233 \
+>  type: NodePort
+
+#### Expose Service
+
+> $ kubectl expose deployment frontend --name=frontend-svc --port=80 --target-port=5000 --type=NodePort
+>> it expose the port 80 accross 5000 port for deployment-service called frontend-svc
+
+#### Create Service Type NodePort
+
+> $ kubectl create service nodeport frontend-svc --tcp=80:5000 --node-port=32233
+>> create deployment-service type nodeport called frontend-svc exposing port 80 across 5000 port
