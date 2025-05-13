@@ -37,3 +37,11 @@ connecto to minikube in terminal mode
 
 > $ minikube SSH
 >> show us terminal commands into minikube
+
+
+## Dashboadr
+
+to see a dashboard web page of minikube to deploy and more in ui use
+
+> $ minikube dashboard
+>> default dashboard is connecting to default namespace
