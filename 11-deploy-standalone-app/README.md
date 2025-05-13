@@ -135,3 +135,4 @@ this connet localhost with cluster ip addres set
 >> ✅  Tunnel successfully started \
 >> 📌  NOTE: Please do not close this terminal as this process must stay alive for the tunnel to be accessible ...
 
+** This command not work with Docker and wsl **
