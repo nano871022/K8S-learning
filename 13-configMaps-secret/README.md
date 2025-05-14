@@ -46,3 +46,51 @@ $ kubectl create configmap permission-config --from-file={path}/permission-reste
 ```
 > configmap/permission-config created
 
+## Apply config map into container in enviroments variables
+
+yaml configuration
+```
+ containers:
+ - name: my-app
+   image: nginx:alpine
+   envFrom:
+   - configMapRef:
+      name: full-config-map 
+```
+
+
+yaml configuration
+```
+ containers:
+ - name: my-app
+   image: nginx:alpine
+   env:
+   - name: SPECIFIC_ENV_VAR1
+     valueFrom:
+      configMapKeyRef:
+       name: config-map1
+       key: SPECIIFIC_DATA
+   - name: SPECIFIC_ENV_VAR2
+     valueFrom:
+      configMapKeyRef:
+       name: config-map2
+       key: SPECIIFIC_INFO
+```
+
+## Apply config map into container with volume
+
+yaml configuration
+```
+ containers:
+ - name: my-app
+   image: nginx:alpine
+   volumeMounts:
+   - name: config-volume
+     mountPath: /etc/config
+ volumes:
+ - name: config-volume
+   configMap:
+    name: vol-config-map  
+```
+
+
