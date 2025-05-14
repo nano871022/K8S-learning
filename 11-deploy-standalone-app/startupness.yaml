@@ -2,11 +2,11 @@ apiVersion: v1
 kind: Pod
 metadata:
  labels:
-  test: readiness
- name: readiness-exec
+  test: startupness
+ name: startupness-exec
 spec:
  containers:
- - name: readiness
+ - name: startupness
    image: busybox
    args:
    - /bin/ash
