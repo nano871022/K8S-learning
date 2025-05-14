@@ -13,10 +13,8 @@ spec:
    - -c
    - touch /temp/healthy; sleep 30; rm -rf /temp/healthy; sleep 600
    livenessProbe:
-    exec:
-     command:
-     - cat
-     - /tmp/healthy
+    tcpSocket:
+     port: 8080
     initialDelaySeconds: 15
     failureThreshold: 1
     periodSeconds: 5
