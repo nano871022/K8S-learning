@@ -10,3 +10,8 @@ Next run command to check in browser
 
 > $ kubectl expose deployment blue-app --type=NodePort
 >> service/blue-app exposed
+
+In my case i need to use 
+
+> $ mikikube port-forward service/blue-app 8080:80
+>> now i can connect to [localhost](http://localhost:8080)
