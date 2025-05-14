@@ -12,7 +12,7 @@ spec:
    - /bin/ash
    - -c
    - touch /temp/healthy; sleep 30; rm -rf /temp/healthy; sleep 600
-   startuoProbe:
+   startupProbe:
     exec:
      command:
      - cat
