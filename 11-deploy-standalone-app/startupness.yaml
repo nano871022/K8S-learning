@@ -12,11 +12,10 @@ spec:
    - /bin/ash
    - -c
    - touch /temp/healthy; sleep 30; rm -rf /temp/healthy; sleep 600
-   readinessProbe:
+   startuoProbe:
     exec:
      command:
      - cat
      - /tmp/healthy
-    initialDelaySeconds: 15
-    failureThreshold: 1
-    periodSeconds: 5
+    failureThreshold: 30
+    periodSeconds: 10
