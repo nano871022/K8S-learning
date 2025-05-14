@@ -4,6 +4,8 @@ This allow us custom data to shared in each pod depends what it needed
 
 ## ConfigMaps
 
+### explicit declaration
+
 > $ kubectl create configmap my-config --from-literal=key1=value1 --from-literal=key2=value2
 >> configmap/my-config created
 
@@ -25,3 +27,12 @@ metadata:
   selfLink: /api/v1/namespaces/default/configmaps/my-config
   uid: d35f0a3d-45d1-11e7-9e62-080027a46057
 ```
+
+### Definition in yaml
+
+file [customer1-configmap.yaml](./customer1-configmap.yaml)
+
+run it 
+
+> $ kubectl apply -f customer1-configmap.yaml
+>> configmap/customer1 created
