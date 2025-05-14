@@ -36,3 +36,13 @@ run it
 
 > $ kubectl apply -f customer1-configmap.yaml
 >> configmap/customer1 created
+
+### Properties File
+
+file [properties](./permission-reste.properties)
+
+``` 
+$ kubectl create configmap permission-config --from-file={path}/permission-reste.properties
+```
+> configmap/permission-config created
+
