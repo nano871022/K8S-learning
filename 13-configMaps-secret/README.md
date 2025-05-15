@@ -144,3 +144,6 @@ metadata:
 ```
 > in this case we can see passwd but encripted in base64
 
+### Create secret with yaml
+
+use [create-password yaml](./create-password.yaml)
