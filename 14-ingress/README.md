@@ -26,3 +26,4 @@ $ kubectl create -f second-ingress.yaml
 >> 192.168.99.100   blue.example.com green.example.com
 >>> linux \
 >>> $ sudo vim /etc‌‌/‌hosts
+
