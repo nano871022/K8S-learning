@@ -21,7 +21,7 @@ spec:
    volumes:
    - name: host-volume
      hostPath:
-      path: /home/docker/blue-shared-volume
+      path: /mnt/c/Users/jose.parra.PERFICIENT/workspace-k8s/learning-cnt/git/K8S-learning/14-ingress
    containers:
    - image: nginx
      name: nginx
