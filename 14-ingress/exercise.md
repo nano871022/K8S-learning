@@ -61,3 +61,10 @@ $ kubectl create -f second-ingress.yaml
 ```
 > ingress.networking.k8s.io/fan-out-ingress created
 
+Check Ingress created
+```
+$ kubectl get ingress 
+```
+NAME            |  CLASS  | HOSTS        | ADDRESS      |  PORTS |  AGE
+----------------|---------|--------------|--------------|--------|---------
+fan-out-ingress |  nginx  | example.com  | 192.168.49.2 |  80    |  20m
