@@ -46,7 +46,7 @@ $ kubectl create configmap permission-config --from-file={path}/permission-reste
 ```
 > configmap/permission-config created
 
-## Apply config map into container in enviroments variables
+### Apply config map into container in enviroments variables
 
 yaml configuration
 ```
@@ -77,7 +77,7 @@ yaml configuration
        key: SPECIIFIC_INFO
 ```
 
-## Apply config map into container with volume
+### Apply config map into container with volume
 
 yaml configuration
 ```
@@ -93,4 +93,54 @@ yaml configuration
     name: vol-config-map  
 ```
 
+## Secrets
+
+this encript infromation in base64 and saved encripted usially in etcd
+
+### Create a Secret
+
+```
+$ kubectl create secret generic my-password --from-literal=password=mysqlpassword
+```
+> secret/my-password created
+
+```
+$ kubectl describe secret my-passwd
+```
+```
+Name:         my-password
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Type:  Opaque
+
+Data
+====
+passwd:  11 bytes
+```
+> in this case we can not see the passwd
+
+```
+$ kubectl get secret my-passwd -o yaml
+```
+```
+apiVersion: v1
+items:
+- apiVersion: v1
+  data:
+    passwd: bXlzcWxwYXNzd2Q=
+  kind: Secret
+  metadata:
+    creationTimestamp: "2025-05-15T00:27:27Z"
+    name: my-password
+    namespace: default
+    resourceVersion: "40704"
+    uid: 3a424fd6-f0b1-41ce-9a26-3468669a2fae
+  type: Opaque
+kind: List
+metadata:
+  resourceVersion: ""
+```
+> in this case we can see passwd but encripted in base64
 
