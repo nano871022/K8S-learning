@@ -8,20 +8,20 @@ metadata:
 spec:
  ingressClassName: nginx
  rules:
- - hosts: example.com
+ - host: example.com
    http:
     paths:
     - path: /blue
       backend:
        service:
-        name: webserver-blue-svc
+        name: blue-svc
         port:
          number: 80
       pathType: ImplementationSpecific
     - path: /green
       backend:
        service:
-        name: webserver-green-svc
+        name: green-svc
         port:
          number: 80
       pathType: InplementationSpecific   
