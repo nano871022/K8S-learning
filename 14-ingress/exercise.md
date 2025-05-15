@@ -54,3 +54,10 @@ NAME                                 |  DESIRED  | CURRENT  | READY  | AGE    | 
 -------------------------------------|-----------|----------|--------|--------|---------------|---------------|-------------------------------------------|-----------
 replicaset.apps/blue-app-84c86b5c8b  |  1        | 1        | 1      | 5h15m  | nginx,debian  | nginx,debian  | app=blue-app,pod-template-hash=84c86b5c8b  |  blue-app
 replicaset.apps/green-app-5d5497d885 |  1        | 1        | 1      | 5h13m  | nginx,debian  | nginx,debian  | app=green-app,pod-template-hash=5d5497d885  | green-app
+
+Run [second-ingress](./second-ingress.yaml) yaml
+```
+$ kubectl create -f second-ingress.yaml
+```
+> ingress.networking.k8s.io/fan-out-ingress created
+
