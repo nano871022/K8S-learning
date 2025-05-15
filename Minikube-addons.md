@@ -20,4 +20,9 @@
 >> 👉  http://127.0.0.1:43297/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/ \
 >>> With this command the dashboard is load in line command, when you close this command the dashboard will be down.
 
+## Ingress Controller ADDONS
+
+```
+$ minikube addons enable ingress 
+```
 
