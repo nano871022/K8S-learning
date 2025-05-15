@@ -21,7 +21,7 @@ A New Pod Is Created After an Old One Terminated Unexpectedly
  
 
 To overcome this situation, Kubernetes provides a higher-level abstraction called Service, which logically groups Pods and defines a policy to access them. This grouping is achieved via Labels and Selectors. This logical grouping strategy is used by Pod controllers, such as ReplicaSets, Deployments, and even DaemonSets. Below is a Deployment definition manifest for the frontend app, to aid with the correlation of Labels, Selectors, and port values between the Deployment controller, its Pod replicas, and the Service definition manifest presented in an upcoming section.
-
+> ```
 > apiVersion: apps/v1 \
 > kind: Deployment \
 > metadata: \
@@ -43,6 +43,7 @@ To overcome this situation, Kubernetes provides a higher-level abstraction calle
 >         name: frontend-application \
 >         ports: \
 >         - containerPort: 5000
+>```
 Labels and Selectors use a key-value pair format. In the following graphical representation, app is the Label key, frontend and db are Label values for different Pods.
 
 
