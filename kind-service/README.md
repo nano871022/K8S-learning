@@ -60,31 +60,39 @@ Services can expose single Pods, ReplicaSets, Deployments, DaemonSets, and State
 
 The following is an example of a Service object definition. This represents the declarative method to define an object, and can serve as a template for a much more complex Service definition manifest if desired. By omitting the Service type from the definition manifest, we create the default service type, the ClusterIP type (the ClusterIP Service type will be covered in an upcoming lesson).
 
-> apiVersion: v1 \
-> kind: Service \
-> metadata: \
->   name: frontend-svc \
-> spec: \
->  selector: \
->     app: frontend \
->   ports: \
->   - protocol: TCP \
->     port: 80 \
+> ```
+> apiVersion: v1 
+> kind: Service 
+> metadata: 
+>   name: frontend-svc 
+> spec: 
+>  selector: 
+>     app: frontend 
+>   ports: 
+>   - protocol: TCP 
+>     port: 80 
 >     targetPort: 5000
+> ```
 
 The above definition manifest, if stored by a frontend-svc.yaml file, is loaded into the cluster to set up the necessary routes and rules to send traffic to the Pod replicas of the earlier defined frontend Deployment. While create is exemplified below, advanced Kubernetes practitioners may opt to use apply instead:
 
-> $ kubectl create -f frontend-svc.yaml
+```
+$ kubectl create -f frontend-svc.yaml
+```
 
 Imperatively, we can use a direct method to expose the Deploymen’s Pods. The following is a multi-line command that should be selected in its entirety for copy/paste (including the backslash character “\”):
 
-> $ kubectl expose deploy frontend --name=frontend-svc --port=80 --target-port=5000
+```
+$ kubectl expose deploy frontend --name=frontend-svc --port=80 --target-port=5000
+```
 
 The expose command parses the referenced Deployment object to extract valuable pairing details such as Name, Label, Selector, and containerPort to populate these values in the Service object. However, especially in cases when the Service port and Service targetPort values are expected to be distinct (80 and 5000 respectively), it is best to explicitly supply these values with the expose command. In addition, we decided to change the name of the Service with the name option (the default behavior is for the Service object to inherit the exposed Deployment’s name frontend).
 
 Another imperative method to set up the same Service from above is through the create service command. The rather complex command below first sets up a frontend Service with frontend Label and frontend Selector in dry-run mode, it updates the Service name to frontend-svc and then loads the definition in the cluster. The following multi-line command should be selected in its entirety for copy/paste (including the backslash character “\”):
 
-> $ kubectl create service clusterip frontend  --tcp=80:5000 --dry-run=client -o yaml \
+```
+$ kubectl create service clusterip frontend  --tcp=80:5000 --dry-run=client -o yaml 
+```
 > | sed 's/name: frontend/name: frontend-svc/g' \
 > | kubectl apply -f -
 
@@ -102,19 +110,21 @@ The Cluster option allows kube-proxy to target all ready Endpoints of the Servic
 The Local option, however, isolates the load-balancing process to only include the Endpoints of the Service located on the same node as the requester Pod, or perhaps the node that captured inbound external traffic on its NodePort (the NodePort Service type will be covered in an upcoming lesson). While this sounds like an ideal option, it does have a shortcoming - if the Service does not have a ready Endpoint on the node where the requester Pod is running, the Service will not route the request to Endpoints on other nodes to satisfy the request because it will be dropped by kube-proxy.
 Both the Cluster and Local options are available for requests generated internally from within the cluster, or externally from applications and clients running outside the cluster. The Service definition manifest below defines both internal and external Local traffic policies. Both are optional settings, and can be used independent of each other, where one can be defined without the other (either internal or external policy).
 
-> apiVersion: v1 \
-> kind: Service \
-> metadata: \
->   name: frontend-svc \
-> spec: \
->   selector: \
->     app: frontend \
->   ports: \
->     - protocol: TCP \
->       port: 80 \
->       targetPort: 5000 \
->   internalTrafficPolicy: Local \
+> ```
+> apiVersion: v1 
+> kind: Service 
+> metadata: 
+>   name: frontend-svc 
+> spec: 
+>   selector: 
+>     app: frontend 
+>   ports: 
+>     - protocol: TCP 
+>       port: 80 
+>       targetPort: 5000 
+>   internalTrafficPolicy: Local 
 >   externalTrafficPolicy: Local
+> ```
 
 # Service Discovery
 
@@ -133,8 +143,10 @@ K8S has Addons for DNS, which create  a DNS records for each service, name of ho
 
 if we need to connect to a container, we can exec next command.
 
-> $ kubectl exec  {client-app-pod-name} -c {client-container-name} --/bin/sh -c curl -s frontend-svc:80
->> idea this comman is run a CURL command over client-container-name locate in client-app-pod-name, it get data from host *frontend-svc* in port *80* request.
+```
+$ kubectl exec  {client-app-pod-name} -c {client-container-name} --/bin/sh -c curl -s frontend-svc:80
+```
+> idea this comman is run a CURL command over client-container-name locate in client-app-pod-name, it get data from host *frontend-svc* in port *80* request.
 
 ## Service Type: Property
 
@@ -147,50 +159,60 @@ We can descide how connect to that service:
 
 A service use a Cluster IP Address to communicate with service and it just accesible since cluster.
 
-> apiVersion: v1 \
-> kind: Service \
-> metadata: \
->  name: frontend-svc \
-> spec: \
->  selector: \
->   app: frontend \
+> ```
+> apiVersion: v1 
+> kind: Service 
+> metadata: 
+>  name: frontend-svc 
+> spec: 
+>  selector: 
+>   app: frontend 
 >  ports: 
->  - protocol: TCP \
->    port: 80 \
->    targetPort: 5000 \
+>  - protocol: TCP 
+>    port: 80 
+>    targetPort: 5000 
 >  *type: ClusterIP*
+> ```
 
 ### Option: NodePort
 
 A service use a port between 30.000 and 32.767, when it have the port, it assing to all worker node that port to redirect it port to ClusterIp has the service setting.
 
-> apiVersion: v1 \
-> kind: Service \
-> metadata: \
->  name: frontend-svc \
-> spec: \
->  selector: \
->    app: frontend \
+> ```
+> apiVersion: v1 
+> kind: Service 
+> metadata: 
+>  name: frontend-svc 
+> spec: 
+>  selector: 
+>    app: frontend 
 >  ports:
->  - protocol: TCP \
->    port: 80 \
->    targetPort: 5000 \
->    nodePort: 32233 \
+>  - protocol: TCP 
+>    port: 80 
+>    targetPort: 5000 
+>    nodePort: 32233 
 >  type: NodePort
+> ```
 
 #### Expose Service
 
-> $ kubectl expose deployment frontend --name=frontend-svc --port=80 --target-port=5000 --type=NodePort
+```
+$ kubectl expose deployment frontend --name=frontend-svc --port=80 --target-port=5000 --type=NodePort
+```
 >> it expose the port 80 accross 5000 port for deployment-service called frontend-svc
 
 #### Create Service Type NodePort
 
-> $ kubectl create service nodeport frontend-svc --tcp=80:5000 --node-port=32233
->> create deployment-service type nodeport called frontend-svc exposing port 80 across 5000 port
+```
+$ kubectl create service nodeport frontend-svc --tcp=80:5000 --node-port=32233
+```
+> create deployment-service type nodeport called frontend-svc exposing port 80 across 5000 port
 
 #### Create an exposer service at same time
 
-> $ kubectl run {name} --image={imamge:version} --port={port} --expose=true
->> service/{name} created \
->> pod/{name} created
+```
+$ kubectl run {name} --image={imamge:version} --port={port} --expose=true
+```
+> service/{name} created \
+> pod/{name} created
 
