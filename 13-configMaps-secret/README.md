@@ -151,3 +151,82 @@ use [create-password yaml](./create-password.yaml)
 $ kubectl create -f create-password.yaml
 ```
 > secret/my-password created
+
+### Create Secret since File
+
+```
+echo mysqlpassword | base64 > password.txt
+kubectl create secret generic my-file-password --from-file=password.txt
+```
+> secret/my-file-password created
+
+check secrets
+```
+kubectl get secrets
+NAME               TYPE     DATA   AGE
+my-passwd          Opaque   1      3m58s
+my-password        Opaque   2      36m
+my-password-file   Opaque   1      9s
+```
+
+check describe
+
+```
+Name:         my-password-file
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Type:  Opaque
+
+Data
+====
+password.txt:  21 bytes
+```
+
+check yaml
+
+```
+apiVersion: v1
+data:
+  password.txt: YlhsemNXeHdZWE56ZDI5eVpBbz0K
+kind: Secret
+metadata:
+  creationTimestamp: "2025-05-15T01:04:10Z"
+  name: my-password-file
+  namespace: default
+  resourceVersion: "42632"
+  uid: cd5b9521-3b85-463f-aa55-abc2d083be1f
+type: Opaque
+```
+> in this can not show us content of file
+
+### Apply Secret to container
+
+```
+spec:
+  containers:
+  - image: wordpress:4.7.3-apache
+    name: wordpress
+    env:
+    - name: WORDPRESS_DB_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: my-password
+          key: password
+```
+
+```
+spec:
+  containers:
+  - image: wordpress:4.7.3-apache
+    name: wordpress
+    volumeMounts:
+    - name: secret-volume
+      mountPath: "/etc/secret-data"
+      readOnly: true
+  volumes:
+  - name: secret-volume
+    secret:
+      secretName: my-password
+```
