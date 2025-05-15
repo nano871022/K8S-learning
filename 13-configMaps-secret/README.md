@@ -147,4 +147,7 @@ metadata:
 ### Create secret with yaml
 
 use [create-password yaml](./create-password.yaml)
+```
+$ kubectl create -f create-password.yaml
+```
 > secret/my-password created
