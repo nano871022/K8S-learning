@@ -17,6 +17,7 @@ File [Ingress Rule Green and Blue](./second-ingress.yaml)
 ```
 $ kubectl create -f second-ingress.yaml
 ```
+>> ingress.networking.k8s.io/fan-out-ingress created
 
 > [!WARNING]
 > its common update hosts file mapping names of server in k8s to minikube IP
