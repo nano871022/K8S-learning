@@ -31,3 +31,6 @@ remove all with
 ```
 $ kubectl delete pod,service,deployment,rs -l app=green-web
 ```
+> pod "green-web-56c7545796-mwr4b" deleted \
+> service "green-web" deleted \
+> deployment.apps "green-web" deleted
