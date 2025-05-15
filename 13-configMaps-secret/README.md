@@ -147,3 +147,4 @@ metadata:
 ### Create secret with yaml
 
 use [create-password yaml](./create-password.yaml)
+> secret/my-password created
