@@ -25,3 +25,9 @@ Check with port forward in browser
 $ kubectl port-forward service/green-web 8080:80
 ```
 > check [web](http://localhost:8080)
+
+remove all with 
+
+```
+$ kubectl delete pod,service,deployment,rs -l app=green-web
+```
