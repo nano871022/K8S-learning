@@ -100,4 +100,36 @@ its used for execute a pod until it finish the process and it will be terminate 
 
   ## Stateful Sets
 
-  
+  App require an unique identify, such as name, network id, stric order. Stateful Set Controller has very strict service and storage volume
+
+  ## Custom Resource
+
+  Dinamically resources appear and disappear
+
+  ### Customer Resource Definition (CRDs)
+
+  easy way to add resources.
+
+  ### API Aggregation
+
+  fine-grained control for custom resources.
+
+  ## Security Context and POD Security Admission
+
+  object access permission, provileaged running, capabilities, secirity labels, etc\
+  limited to PODs and Contrainers, its setting in spec secction
+
+  > ```
+  > spec:
+  > securityContext:
+  >   runAsUser: 1000
+  >   runAsGroup: 3000
+  >   fsGroup: 2000
+  > ```
+
+  ## Network Policies
+
+  Network Policy API resources specifies podSelectors, ingress, egress policy types, and rules based on source and desination **ipBlocks** and **ports**\
+  simplistic **default allow** and **default deny** policy, recomendated define **default deny** policy to block all traffic and then define set od rules for specific traffic allowed.
+
+  Ex. [Network Policy](./networkpolicy.yaml)
