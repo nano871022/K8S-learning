@@ -135,3 +135,26 @@ its used for execute a pod until it finish the process and it will be terminate 
   Ex. [Network Policy](./networkpolicy.yaml)
 
   in this example block all ips and open port to specific project
+
+  ## Monitoring, Logging and Troubleshooting
+
+  * **Metric Server**
+  * **Prometheus** app by CNCF
+
+  ### Commands
+
+  ```
+  $ kubectl logs {pod-name}
+  ```
+  ```
+  $ kubectl exec {pod-name} -- ls -la
+  ```
+  ```
+  $ kubectl exec {pod-name} -it -- /bin/sh
+  ```
+  ```
+  $ kubectl get events
+  ```
+  ```
+  $ kubectl events
+  ```
