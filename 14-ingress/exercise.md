@@ -68,3 +68,39 @@ $ kubectl get ingress
 NAME            |  CLASS  | HOSTS        | ADDRESS      |  PORTS |  AGE
 ----------------|---------|--------------|--------------|--------|---------
 fan-out-ingress |  nginx  | example.com  | 192.168.49.2 |  80    |  20m
+
+# test it
+
+## same machine run docker
+
+if you workin in same machine with docker direct, you just need to use http://$(minikubeip)/blue or http://$(minikubeip)/green
+
+## wls 
+
+if you use linux over windows wls you need to
+
+```
+$ kubectl port-forward -n ingress-nginx service/ingress-nginx-controller-{hashcode}
+```
+> when you run ```$ minikube addons enable ingress``` it create a namespace called ingress-nginx where it save controller ingress and manage all over this
+>> ```
+>> $ kubectl get all -n ingress-nginx
+>> ```
+
+and you need add in ```c:/windows/system32/driver/etc/hosts``` edit file and  add line ```127.0.0.1 local-domain.dev```
+
+now you can use browser and put http://local-domain.dev/blue
+
+but if does not work try in cmd terminal
+
+```
+$ curl -v http://local-domain.dev:8082/blue
+$ curl -v http://local-domain.dev:8082/green
+```
+
+or use it over linux into wls
+
+```
+$ curl -v -H "Host: local-domain.dev" http://localhost:8082/blue
+$ curl -v -H "Host: local-domain.dev" http://localhost.dev:8082/green
+```
