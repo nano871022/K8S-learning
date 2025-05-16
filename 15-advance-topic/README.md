@@ -43,4 +43,16 @@ this limit resources
 2. **Storage Resource Quota**: limit total sum of storage resource, that can be requested [PersistentVolumeClaims, request.storage, etc]
 3. **Object Count Quota**: restrict num of objects [Pods, ConfigMaps, PersistentVolumeClaims, ReplicationCOntrollers, Services, Secret, etc]
 
-Examples, [Coumpute Resource Quote](./computeresourcequote.yaml)
+Examples, 
+* [Coumpute Resource Quota](./computeresourcequote.yaml)
+* [Object Count Quota](./objectcountquota.yaml)
+
+## Limite Range
+
+It limit resources allocation to POD and Containers in a namespace
+*  Compute resources limits
+*  Storage request limit per Persistent Volume Claim
+*  Limit Ratio for a resource
+*  Request, limits and inject them to containers env.
+
+  Example [Limit Range](./limitrange.yaml)
