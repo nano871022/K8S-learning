@@ -159,6 +159,6 @@ its used for execute a pod until it finish the process and it will be terminate 
   $ kubectl events
   ```
 
-  ## Helm
+  ## [Helm](https://helm.sh/)
 
   app to work with object [Deploymentl, servces, PersisteVolumes,...] its a charht repository to help with this, now, it use kubectl and kubeconfig to securely communicate with k8s API server.
