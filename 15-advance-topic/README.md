@@ -35,3 +35,12 @@ $ kubectl run saved --image=nginx:alpine --save-image=true
 $ kubectk get pod saved -o yaml
 ```
 > this command create a yaml look like this [save config = true](./saved-config-trye.yaml)
+
+## Resource Quota
+
+this limit resources
+1. **Compute Resource Quota**: CPU , Memory, etc in namespaces requested
+2. **Storage Resource Quota**: limit total sum of storage resource, that can be requested [PersistentVolumeClaims, request.storage, etc]
+3. **Object Count Quota**: restrict num of objects [Pods, ConfigMaps, PersistentVolumeClaims, ReplicationCOntrollers, Services, Secret, etc]
+
+Examples, [Coumpute Resource Quote](./computeresourcequote.yaml)
