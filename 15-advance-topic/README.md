@@ -27,3 +27,11 @@ example uses
 >   annotations:
 >     description: Deployment based PoC dates 2nd Mar'2022
 > ```
+
+Test this command
+
+```
+$ kubectl run saved --image=nginx:alpine --save-image=true
+$ kubectk get pod saved -o yaml
+```
+> this command create a yaml look like this [save config = true](./save-config-true.yaml)
