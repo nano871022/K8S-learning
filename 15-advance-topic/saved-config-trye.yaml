@@ -1,0 +1,107 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"kind":"Pod","apiVersion":"v1","metadata":{"name":"saved","creationTimestamp":null,"labels":{"run":"saved"}},"spec":{"containers":[{"name":"saved","image":"nginx:alpine","resources":{}}],"restartPolicy":"Always","dnsPolicy":"ClusterFirst"},"status":{}}
+  creationTimestamp: "2025-05-16T15:26:33Z"
+  labels:
+    run: saved
+  name: saved
+  namespace: default
+  resourceVersion: "39483"
+  uid: ef4e14d3-3b1f-4c28-96d6-ed13aa41a107
+spec:
+  containers:
+  - image: nginx:alpine
+    imagePullPolicy: IfNotPresent
+    name: saved
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-mmqc2
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: minikube-m03
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-mmqc2
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-05-16T15:26:38Z"
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-05-16T15:26:33Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-05-16T15:26:38Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-05-16T15:26:38Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-05-16T15:26:33Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://6ee1127897154c0087e2c3be2f3bdefe664c002d391952a9cde6c20e3c495269
+    image: nginx:alpine
+    imageID: docker-pullable://nginx@sha256:65645c7bb6a0661892a8b03b89d0743208a18dd2f3f17a54ef4b76fb8e2f2a10
+    lastState: {}
+    name: saved
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2025-05-16T15:26:38Z"
+  hostIP: 192.168.49.4
+  hostIPs:
+  - ip: 192.168.49.4
+  phase: Running
+  podIP: 10.244.2.3
+  podIPs:
+  - ip: 10.244.2.3
+  qosClass: BestEffort
+  startTime: "2025-05-16T15:26:33Z"
