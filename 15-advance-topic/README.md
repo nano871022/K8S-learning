@@ -133,3 +133,5 @@ its used for execute a pod until it finish the process and it will be terminate 
   simplistic **default allow** and **default deny** policy, recomendated define **default deny** policy to block all traffic and then define set od rules for specific traffic allowed.
 
   Ex. [Network Policy](./networkpolicy.yaml)
+
+  in this example block all ips and open port to specific project
