@@ -56,3 +56,48 @@ It limit resources allocation to POD and Containers in a namespace
 *  Request, limits and inject them to containers env.
 
   Example [Limit Range](./limitrange.yaml)
+
+## Auto Scaling
+
+It help us to scale pods automatically depends of metrics
+
+### Horizontal POD AutoScaler (HPA)
+
+Auto scaler based on CPU utilization to ReplicaSet, Deployment or Recplication Controller
+
+Ex:.
+```
+$ kubectl autoscale deploy my-app --min=2 --max=10 --cpu-percent=80
+```
+> this setting say to my-app than min pods replicates are 2 and max 10 and it increase it when cpu reach 80% of used
+
+### Vertical POD AutoScaler (VPA)
+
+Resource requirements of CPU and Memory ina POD. based on historical utlization data, availablility and real time events , its installed as a Custome Resource
+
+### Cluster AutoScaler
+
+Re-size Kubernetes Cluster, when there are insufficient resources available for new pods.
+
+## Job And CronJobs
+
+### Job
+
+its used for execute a pod until it finish the process and it will be terminate automatically
+
+* **Parallelism**: Pods run in parallel
+* **Completions**: Num expected completions
+* **Active Dead Line Seconds**: Duration Job
+* **Back Off Limit**: Num retries before Job is marked as failed
+* **TTL Seconds After Finised**: Delay cleanup of the finished Jobs.
+
+  ### CronJobs
+
+  Job at schedule times/date, Job Object is create per each execution cycle
+
+  * **Start Dead Line Seconds**: dedline to start a job if scheduled time was missed.
+  * ** Concurrency Policy**: Allow or forbid concurrent jobs or replace old job with new ones
+
+  ## Stateful Sets
+
+  
